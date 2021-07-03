@@ -3,12 +3,18 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-title = "Stepik Travel"
+title = "Travel"
 subtitle = "Для тех, кого отвлекают дома"
 description = """Лучшие направления, где никто не будет вам мешать сидеть на берегу и изучать программирование, 
 дизайн, разработку игр и управление продуктами """
-departur = {"msk": "Из Москвы", "spb": "Из Петербурга", "nsk": "Из Новосибирска", "ekb": "Из Екатеринбурга",
-			"kazan": "Из Казани"}
+
+departur = {
+	"msk": "Из Москвы",
+	"spb": "Из Петербурга",
+	"nsk": "Из Новосибирска",
+	"ekb": "Из Екатеринбурга",
+	"kazan": "Из Казани"
+}
 
 tours_n = {
 	1: {
@@ -254,7 +260,6 @@ tours_n = {
 
 @app.route('/')
 def index():
-	count = len(tours_n)
 	return render_template('index.html', data=tours_n)
 
 
@@ -262,7 +267,7 @@ def index():
 def departures(departure):
 	count = 0
 	cost_min, cost_max = 1000000, 0
-	n_min, n_max = 1000, 0
+	n_min, n_max = 1000000, 0
 	for i in tours_n:
 		if tours_n[i]["departure"] == departure:
 			count += 1
@@ -285,10 +290,6 @@ def tours(id):
 	except KeyError:
 		return flask.abort(404)
 	return render_template('tour.html', data=hotel, dpt=departur)
-
-@app.route('/hello')
-def hello():
-	return 'hello'
 
 
 if __name__ == '__main__':

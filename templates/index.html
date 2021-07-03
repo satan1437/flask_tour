@@ -22,16 +22,16 @@
                     <a class="nav-link" href="/departures/msk">Из Москвы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Из Петербурга</a>
+                    <a class="nav-link" href="/departures/spb">Из Петербурга</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Из Новосибирска</a>
+                    <a class="nav-link" href="/departures/nsk">Из Новосибирска</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Из Екатеринбурга</a>
+                    <a class="nav-link" href="/departures/ekb">Из Екатеринбурга</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Из Казани</a>
+                    <a class="nav-link" href="/departures/kazan">Из Казани</a>
                 </li>
             </ul>
         </div>
@@ -40,9 +40,9 @@
 <main class="container mt-3">
     <!-- HERO -->
     <section class="jumbotron text-center mt-4"
-             style="text-shadow: white 1px 1px 4px;
+             style="text-shadow: black 1px 1px 4px;
              color: white;
-             background: url('https://wallpaperaccess.com/full/2397005.jpg');
+             background: url('https://photo.hotellook.com/static/countries/1400x400/FM.auto');
              background-position: center center">
         <h1 class="display-4">Всякие туры</h1>
         <p class="lead">Для тех, кого отвлекают дома</p>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="card-body">
                         <h2 class="h5 card-title">{{ data[item]['title'] }}</h2>
-                        <p class="card-text">{{ data[item]['description'][:201:] }}...</p>
+                        <p class="card-text">{{ data[item]['description'][:150:] }}...</p>
                         <a href="/tour/{{ item }}" class="btn btn-sm btn-primary">Подробнее</a>
                     </div>
                 </div>
