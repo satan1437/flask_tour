@@ -1,39 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
-    <title>Travel</title>
+    <title>{{ title }}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 </head>
-
 <body>
 <header class="container mt-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Travel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="/">{{ title }}</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/departures/msk">Из Москвы</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/departures/spb">Из Петербурга</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/departures/nsk">Из Новосибирска</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/departures/ekb">Из Екатеринбурга</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/departures/kazan">Из Казани</a>
-                </li>
+                {% for item in nav -%}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('departures', departure=item) }}">{{ nav[item] }}</a>
+                    </li>
+                {% endfor -%}
             </ul>
         </div>
     </nav>
@@ -52,8 +38,7 @@
     </section>
     <!-- CARDS -->
     <div class="row mt-5">
-
-        {% for item in data %}
+        {% for item in data -%}
             <div class="col-4">
                 <div class="card mb-4">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -62,13 +47,13 @@
                     <div class="card-body">
                         <h2 class="h5 card-title">{{ data[item]['title'] }}</h2>
                         <p class="card-text">{{ data[item]['description']|truncate(155) }}</p>
-                        <a href="/tour/{{ item }}" class="btn btn-sm btn-primary">Подробнее</a>
+                        <a href="{{ url_for('tours', id=item) }}" class="btn btn-sm btn-primary">Подробнее</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
-
     </div>
 </main>
+
 </body>
 </html>

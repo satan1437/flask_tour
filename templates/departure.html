@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Travel</title>
+    <title>{{ title }} - {{ nav[rgn] }}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -10,70 +11,27 @@
 <body>
 <header class="container mt-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Travel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="/">{{ title }}</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                {% if rgn == 'msk' %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/departures/msk">Из Москвы</a>
+                {% for item in nav -%}
+                    <li class="nav-item {% if rgn == item -%}active{% else -%} {% endif -%}">
+                        <a class="nav-link"
+                           href="{{ url_for('departures', departure=item) }}">{{ nav[item] }}</a>
                     </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/departures/msk">Из Москвы</a>
-                    </li>
-                {% endif %}
-                {% if rgn == 'spb' %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/departures/spb">Из Петербурга</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/departures/spb">Из Петербурга</a>
-                    </li>
-                {% endif %}
-                {% if rgn == 'nsk' %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/departures/nsk">Из Новосибирска</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/departures/nsk">Из Новосибирска</a>
-                    </li>
-                {% endif %}
-                {% if rgn == 'ekb' %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/departures/ekb">Из Екатеринбурга</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/departures/ekb">Из Екатеринбурга</a>
-                    </li>
-                {% endif %}
-                {% if rgn == 'kazan' %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/departures/kazan">Из Казани</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/departures/kazan">Из Казани</a>
-                    </li>
-                {% endif %}
-
+                {% endfor -%}
             </ul>
         </div>
     </nav>
 </header>
 <main class="container mt-3">
     <h1 class="display-5 mt-4">Летим Из Москвы</h1>
-    <p class="mb-4">Найдено {{ temp[0] }} туров, от {{ temp[1] }} до {{ temp[2] }} и от {{ temp[3] }} ночей до {{ temp[4] }} ночей</p>
+    <p class="mb-4">Найдено {{ temp[0] }} туров, от {{ temp[1] }} до {{ temp[2] }} и от {{ temp[3] }} ночей
+        до {{ temp[4] }} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
-        {% for item in data %}
-            {% if data[item]['departure'] == rgn %}
+        {% for item in data -%}
+            {% if data[item]['departure'] == rgn -%}
                 <div class="col-4">
                     <div class="card mb-4">
                         <div class="embed-responsive embed-responsive-16by9">
@@ -86,10 +44,9 @@
                         </div>
                     </div>
                 </div>
-            {% endif %}
-        {% endfor %}
+            {% endif -%}
+        {% endfor -%}
     </div>
-
 </main>
 </body>
 </html>
