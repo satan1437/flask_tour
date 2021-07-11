@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, url_for
+from flask import Flask, render_template, abort
 import data
 
 app = Flask(__name__)
@@ -30,8 +30,8 @@ def departures(departure):
 				n_max = data.tours[i]["nights"]
 			if data.tours[i]["nights"] < n_min:
 				n_min = data.tours[i]["nights"]
-
 	temp = [count, cost_min, cost_max, n_min, n_max]
+
 	return render_template(
 		'departure.html',
 		data=data.tours,
@@ -55,4 +55,4 @@ def tours(id):
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run()
