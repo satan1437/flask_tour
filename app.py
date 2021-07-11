@@ -15,6 +15,8 @@ def index():
 
 @app.route('/departures/<departure>')
 def departures(departure):
+	if not departure.isalpha():
+		return abort(404)
 	count = 0
 	cost_min, cost_max = float('inf'), float('-inf')
 	n_min, n_max = float('inf'), float('-inf')
@@ -53,6 +55,11 @@ def tours(id):
 		data=hotel,
 		nav=data.departure,
 		title=data.title)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+	return render_template('404.html', title=data.title)
 
 
 if __name__ == '__main__':
