@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request, flash
 import data
 
 app = Flask(__name__)
@@ -47,6 +47,7 @@ def tours(id):
 		hotel = data.tours[id]
 	except KeyError:
 		return abort(404)
+
 	return render_template(
 		'tour.html',
 		data=hotel,
@@ -55,4 +56,4 @@ def tours(id):
 
 
 if __name__ == '__main__':
-	app.run()
+	app.run(debug=True)
