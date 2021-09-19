@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, request, flash
+from flask import Flask, render_template, abort
 import data
 
 app = Flask(__name__)
