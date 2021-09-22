@@ -25,7 +25,7 @@
 </header>
 <main class="container mt-3">
     <h1 class="display-5 mt-4">Летим Из Москвы</h1>
-    <p class="mb-4">Найдено {{ temp[0] }} туров, от {{ temp[1] }} до {{ temp[2] }} и от {{ temp[3] }} ночей
+    <p class="mb-4">Найдено {{ temp[0] }} тура, от {{ temp[1] }} руб. до {{ temp[2] }} руб. и от {{ temp[3] }} ночей
         до {{ temp[4] }} ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
@@ -40,7 +40,7 @@
                              class="card-body">
                             <h2 class="h5 card-title">{{ data[item]['title'] }}</h2>
                             <p class="card-text">{{ data[item]['description']|truncate(155) }}</p>
-                            <a href="/tour/{{ item }}" class="btn btn-sm btn-primary">Подробнее</a>
+                            <a href="{{ url_for('tours', id=item) }}" class="btn btn-sm btn-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
